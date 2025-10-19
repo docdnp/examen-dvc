@@ -30,3 +30,14 @@ stages:
     outs:
       - models/best_model_params.pkl
       - models/grid_search_results.json
+
+  train_model:
+    cmd: python src/models/train_model.py
+    deps:
+      - src/models/train_model.py
+      - models/best_model_params.pkl
+      - data/processed_data/X_train_scaled.csv
+      - data/processed_data/y_train.csv
+    outs:
+      - models/trained_model.pkl
+      - models/training_info.json
