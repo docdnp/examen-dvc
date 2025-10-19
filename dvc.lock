@@ -1,7 +1,7 @@
 schema: '2.0'
 stages:
   split_data:
-    cmd: .venv/bin/python src/data/split_data.py
+    cmd: python src/data/split_data.py
     deps:
     - path: data/raw_data/raw.csv
       hash: md5
@@ -56,3 +56,31 @@ stages:
       hash: md5
       md5: a9cd9d91da89f732843d72548f64ded3
       size: 25951
+  normalize_data:
+    cmd: python src/data/normalize_data.py
+    deps:
+    - path: data/processed_data/X_test.csv
+      hash: md5
+      md5: b2af62a7e108b077aec89fa2622996db
+      size: 52624
+    - path: data/processed_data/X_train.csv
+      hash: md5
+      md5: 535251fa6c1a1d098cc7a36e0bd62f38
+      size: 209468
+    - path: src/data/normalize_data.py
+      hash: md5
+      md5: 21c82539610a2ad4b390def82d81d2d3
+      size: 2400
+    outs:
+    - path: data/processed_data/X_test_scaled.csv
+      hash: md5
+      md5: 5e079189af6bd091d651a89fafb1c290
+      size: 57026
+    - path: data/processed_data/X_train_scaled.csv
+      hash: md5
+      md5: c1b80eb7f083888b625dd0369cf381f8
+      size: 227497
+    - path: models/scaler.pkl
+      hash: md5
+      md5: de5d3d04cc4c6ba35e4675069aa9a467
+      size: 854
