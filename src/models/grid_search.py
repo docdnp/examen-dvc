@@ -92,19 +92,39 @@ def grid_search_best_params():
         # Fit the grid search
         grid_search.fit(X_train_scaled, y_train)
         
+        # Calculate additional metrics for the best model
+        best_estimator = grid_search.best_estimator_
+        y_pred_cv = best_estimator.predict(X_train_scaled)
+        mse = mean_squared_error(y_train, y_pred_cv)
+        rmse = np.sqrt(mse)
+        r2 = r2_score(y_train, y_pred_cv)
+        
         # Store results
-        best_models[model_name] = grid_search.best_estimator_
+        best_models[model_name] = best_estimator
         results[model_name] = {
             'best_params': grid_search.best_params_,
             'best_score': grid_search.best_score_,
             'cv_results': {
                 'mean_test_score': float(grid_search.best_score_),
                 'std_test_score': float(grid_search.cv_results_['std_test_score'][grid_search.best_index_])
+            },
+            'additional_metrics': {
+                'mse': float(mse),
+                'rmse': float(rmse),
+                'r2_score': float(r2)
             }
         }
         
         print(f"Best parameters: {grid_search.best_params_}")
         print(f"Best CV score (neg MSE): {grid_search.best_score_:.4f}")
+        print(f"RMSE: {rmse:.4f}")
+        print(f"R² Score: {r2:.4f}")
+        
+        # Calculate target variable statistics for context
+        y_mean = y_train.mean()
+        y_std = y_train.std()
+        print(f"Target mean: {y_mean:.4f}, std: {y_std:.4f}")
+        print(f"RMSE as % of target std: {(rmse/y_std)*100:.2f}%")
     
     # Find the overall best model
     best_model_name = max(results.keys(), key=lambda x: results[x]['best_score'])
