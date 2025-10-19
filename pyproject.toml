@@ -1,0 +1,10 @@
+[project]
+name = "examen-dvc"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "dvc>=3.63.0",
+    "dvc-s3>=3.2.2",
+]
