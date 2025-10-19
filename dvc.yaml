@@ -20,3 +20,13 @@ stages:
       - data/processed_data/X_train_scaled.csv
       - data/processed_data/X_test_scaled.csv
       - models/scaler.pkl
+
+  grid_search:
+    cmd: python src/models/grid_search.py
+    deps:
+      - src/models/grid_search.py
+      - data/processed_data/X_train_scaled.csv
+      - data/processed_data/y_train.csv
+    outs:
+      - models/best_model_params.pkl
+      - models/grid_search_results.json
