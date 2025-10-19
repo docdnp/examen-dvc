@@ -1,0 +1,11 @@
+stages:
+  split:
+    cmd: .venv/bin/python src/data/split_data.py
+    deps:
+      - src/data/split_data.py
+      - data/raw_data/raw.csv
+    outs:
+      - data/processed_data/X_train.csv
+      - data/processed_data/X_test.csv
+      - data/processed_data/y_train.csv
+      - data/processed_data/y_test.csv

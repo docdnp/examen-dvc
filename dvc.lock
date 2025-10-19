@@ -28,3 +28,31 @@ stages:
       hash: md5
       md5: a9cd9d91da89f732843d72548f64ded3
       size: 25951
+  split:
+    cmd: .venv/bin/python src/data/split_data.py
+    deps:
+    - path: data/raw_data/raw.csv
+      hash: md5
+      md5: 617b56af2992376d5c3e91ad80823898
+      size: 333757
+    - path: src/data/split_data.py
+      hash: md5
+      md5: 0d880167ed5581891e7bb63753a10bb7
+      size: 1954
+    outs:
+    - path: data/processed_data/X_test.csv
+      hash: md5
+      md5: b2af62a7e108b077aec89fa2622996db
+      size: 52624
+    - path: data/processed_data/X_train.csv
+      hash: md5
+      md5: 535251fa6c1a1d098cc7a36e0bd62f38
+      size: 209468
+    - path: data/processed_data/y_test.csv
+      hash: md5
+      md5: a051d29629c8bbb4cfb7e85c7f0315da
+      size: 6456
+    - path: data/processed_data/y_train.csv
+      hash: md5
+      md5: a9cd9d91da89f732843d72548f64ded3
+      size: 25951
